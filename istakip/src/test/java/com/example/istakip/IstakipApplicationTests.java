@@ -156,16 +156,16 @@ class IstakipApplicationTests {
 	@Test
 	public void testCreateIs() throws Exception{
 		isDO isdo=new isDO();
-		//personelDO.setId(personelDO.getId());
+
 		isdo.setIsadi("muhasebe");
 
 		PersonelDO personelDO=new PersonelDO();
-		//departmanDO.setId(departmanDO.getId());
+
 		personelDO.setId(5L);
 		personelDO.setName(personelDO.getName());
 		personelDO.setSurname(personelDO.getSurname());
 
-		//personelDO.setDepartman(departmanDO);
+
 		isdo.setPersonel(personelDO);
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/is/personel/{id}/isler",5L)
@@ -177,6 +177,43 @@ class IstakipApplicationTests {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.isadi").exists())
 
 		;
+
+	}
+
+	@Test
+	public void testUpdateIs() throws Exception{
+
+		isDO isdo=new isDO();
+		isdo.setId(7L);
+
+		isdo.setIsadi("Mobil Uygulama");
+
+		PersonelDO personelDO=new PersonelDO();
+
+		personelDO.setId(5L);
+		personelDO.setName(personelDO.getName());
+		personelDO.setSurname(personelDO.getSurname());
+
+
+		isdo.setPersonel(personelDO);
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/is/personel/isler/{isId}",7L)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(asJsonString(isdo)))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
+				//.andExpect(MockMvcResultMatchers.jsonPath("$.name").exists())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.isadi").exists())
+
+		;
+
+	}
+	@Test
+	public void testdeleteIs() throws  Exception{
+		String isId="9";
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/is/personel/isler/{isId}",isId)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk());
 
 	}
 
