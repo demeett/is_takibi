@@ -6,6 +6,7 @@ import com.example.istakip.repository.PersonelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,5 +64,10 @@ public class PersonelServiceImpl implements PersonelService{
             return currentPersonel.get();
         }
         return null;
+    }
+
+    @Override
+    public List<PersonelDO> getAllPersonel() {
+        return personelRepository.findAll();
     }
 }

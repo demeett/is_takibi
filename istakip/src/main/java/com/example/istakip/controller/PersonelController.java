@@ -3,10 +3,13 @@ package com.example.istakip.controller;
 
 import com.example.istakip.domain.PersonelDO;
 import com.example.istakip.service.PersonelService;
+import org.aspectj.weaver.patterns.HasMemberTypePatternForPerThisMatching;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/is")
@@ -41,6 +44,12 @@ public class PersonelController {
     public ResponseEntity<String > deletePersonel(@PathVariable(value = "personelId") Long personelId){
         personelService.deletePersonel(personelId);
         return new ResponseEntity<>("Personel with  id: "+ personelId+ " is deleted.", HttpStatus.OK);
+    }
+    @GetMapping(path = "/personels")
+    public ResponseEntity<List<PersonelDO>> getAllPersonel(){
+        List<PersonelDO> allPersonel=personelService.getAllPersonel();
+        return new ResponseEntity<>(allPersonel, HttpStatus.OK);
+
     }
 
 

@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface PersonelRepository extends JpaRepository<PersonelDO,Long> {
     //Optional<PersonelDO> findBysurname(String surname);
+    //Optional<PersonelDO> findByIdandIsid( Long id,Long isid );
 
 }
